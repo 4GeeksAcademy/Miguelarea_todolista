@@ -1,11 +1,135 @@
-/* 
+/* Estilo general */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #ecececfc;
+  color: #333;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+/* Centrado */
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+}
 
-*/
+/* Título principal */
+.titulo {
+  font-size: 70px;
+  font-weight: 100;
+  color: #ebcfd5;
+  margin-bottom: 40px;
+}
+
+/* Tarjeta principal */
+.tarjeta {
+  background-color: white;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 4px;
+  position: relative;
+  margin-bottom: 60px;
+  z-index: 10;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Hojas detrás (usando pseudo-elementos) */
+.tarjeta::before,
+.tarjeta::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 100%;
+  background-color: white;
+  border-radius: 4px;
+  z-index: -1;
+}
+
+.tarjeta::before {
+  top: 6px;
+  box-shadow: 0 1px 1px rgba(141, 139, 139, 0.06);
+}
+
+.tarjeta::after {
+  top: 6px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid #d2d2d2;
+}
+
+/* Campo de entrada */
+.entrada {
+  width: 100%;
+  font-size: 24px;
+  padding: 20px 30px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  color: #333;
+  background: transparent;
+}
+
+/* Lista de tareas */
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Tarea individual */
+.tarea {
+  padding: 20px 30px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* Botón de borrar */
+.borrar {
+  background: none;
+  border: none;
+  color: #dc7575;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.tarea:hover .borrar {
+  opacity: 1;
+}
+
+/* Mensaje vacío */
+.mensaje-vacio {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+
+/* Contador de tareas */
+.contador {
+  font-size: 10px;
+  color: #aaa;
+  padding: 10px 20px;
+  border-top: 1px solid #d2d2d2;
+  border-bottom: 1px solid #d2d2d2;
+  background: white;
+}
+
+/* 🔽 Hoja adicional debajo (la tercera capa visual) */
+.hoja-extra {
+  width: 80%;
+  max-width: 560px;
+  height: 8px;
+  background-color: white;
+  border-radius: 4px;
+  margin-top: -56px;
+  border-top: 1px solid #d2d2d2;
+  z-index: 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid #d2d2d2;
+}
+
