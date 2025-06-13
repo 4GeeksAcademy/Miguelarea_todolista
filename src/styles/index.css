@@ -1,4 +1,4 @@
-/* Estilo general */
+
 body {
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@ body {
   color: #333;
 }
 
-/* Centrado */
+
 .contenedor {
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@ body {
   padding-top: 80px;
 }
 
-/* Título principal */
+
 .titulo {
   font-size: 70px;
   font-weight: 100;
@@ -23,7 +23,7 @@ body {
   margin-bottom: 40px;
 }
 
-/* Tarjeta principal */
+
 .tarjeta {
   background-color: white;
   width: 100%;
@@ -35,7 +35,7 @@ body {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-/* Hojas detrás (usando pseudo-elementos) */
+
 .tarjeta::before,
 .tarjeta::after {
   content: '';
@@ -59,7 +59,6 @@ body {
   border-bottom: 1px solid #d2d2d2;
 }
 
-/* Campo de entrada */
 .entrada {
   width: 100%;
   font-size: 24px;
@@ -71,14 +70,13 @@ body {
   background: transparent;
 }
 
-/* Lista de tareas */
+
 .lista {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Tarea individual */
 .tarea {
   padding: 20px 30px;
   border-top: 1px solid #eee;
@@ -88,7 +86,7 @@ body {
   position: relative;
 }
 
-/* Botón de borrar */
+
 .borrar {
   background: none;
   border: none;
@@ -102,14 +100,13 @@ body {
   opacity: 1;
 }
 
-/* Mensaje vacío */
+
 .mensaje-vacio {
   text-align: center;
   color: #999;
   padding: 20px;
 }
 
-/* Contador de tareas */
 .contador {
   font-size: 10px;
   color: #aaa;
@@ -119,7 +116,7 @@ body {
   background: white;
 }
 
-/* 🔽 Hoja adicional debajo (la tercera capa visual) */
+
 .hoja-extra {
   width: 80%;
   max-width: 560px;
