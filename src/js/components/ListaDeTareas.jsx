@@ -21,7 +21,6 @@ const ListaDeTareas = () => {
     <div className="contenedor">
       <h1 className="titulo">tareas</h1>
 
-      {/* Tarjeta principal */}
       <div className="tarjeta">
         <input
           className="entrada"
@@ -54,7 +53,7 @@ const ListaDeTareas = () => {
         </div>
       </div>
 
-      {/* Hoja extra debajo de la tarjeta */}
+      
       <div className="hoja-extra"></div>
     </div>
   );
