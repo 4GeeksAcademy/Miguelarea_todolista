@@ -19,7 +19,7 @@ const ListaDeTareas = () => {
 
   return (
     <div className="contenedor">
-      <h1 className="titulo">tareas</h1>
+      <h2 className="titulo">tareas</h2>
 
       <div className="tarjeta">
         <input
