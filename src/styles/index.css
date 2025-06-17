@@ -123,10 +123,29 @@ body {
   height: 8px;
   background-color: white;
   border-radius: 4px;
-  margin-top: -56px;
+  margin-top: -120px;
   border-top: 1px solid #d2d2d2;
   z-index: 0;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   border-bottom: 1px solid #d2d2d2;
+}
+.boton-limpiar-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.borrar-todo {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.borrar-todo:hover {
+  background-color: #cc0000;
 }
 

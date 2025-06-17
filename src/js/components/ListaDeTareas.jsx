@@ -96,44 +96,47 @@ const ListaDeTareas = () => {
   };
 
   return (
-    <div className="contenedor">
-      <h2 className="titulo">Tareas de {user}</h2>
+  <div className="contenedor">
+    <h2 className="titulo">Tareas de {user}</h2>
 
-      <div className="tarjeta">
-        <input
-          className="entrada"
-          type="text"
-          placeholder="¿Qué hay que hacer?"
-          value={nuevaTarea}
-          onChange={(e) => setNuevaTarea(e.target.value)}
-          onKeyDown={agregarTarea}
-        />
+    <div className="tarjeta">
+      <input
+        className="entrada"
+        type="text"
+        placeholder="¿Qué hay que hacer?"
+        value={nuevaTarea}
+        onChange={(e) => setNuevaTarea(e.target.value)}
+        onKeyDown={agregarTarea}
+      />
 
-        <ul className="lista">
-          {listaDeTareas.length === 0 ? (
-            <li className="mensaje-vacio">No hay tareas, añade una</li>
-          ) : (
-            listaDeTareas.map((tarea) => (
-              <li key={tarea.id} className="tarea">
-                <span>{tarea.label}</span>
-                <button className="borrar" onClick={() => eliminarTarea(tarea.id)}>
-                  <Trash2 size={16} />
-                </button>
-              </li>
-            ))
-          )}
-        </ul>
+      <ul className="lista">
+        {listaDeTareas.length === 0 ? (
+          <li className="mensaje-vacio">No hay tareas, añade una</li>
+        ) : (
+          listaDeTareas.map((tarea) => (
+            <li key={tarea.id} className="tarea">
+              <span>{tarea.label}</span>
+              <button className="borrar" onClick={() => eliminarTarea(tarea.id)}>
+                <Trash2 size={16} />
+              </button>
+            </li>
+          ))
+        )}
+      </ul>
 
-        <div className="contador">
-          {listaDeTareas.length} tareas pendientes
-        </div>
-
-        <button className="borrar-todo" onClick={eliminarTodas}>
-          Limpiar todas las tareas
-        </button>
+      <div className="contador">
+        {listaDeTareas.length} tareas pendientes
       </div>
     </div>
-  );
+
+    <div className="boton-limpiar-wrapper">
+      <button className="borrar-todo" onClick={eliminarTodas}>
+        Limpiar todas las tareas
+      </button>
+    </div>
+    <div className="hoja-extra"></div>
+  </div>
+ );
 };
 
 export default ListaDeTareas;
