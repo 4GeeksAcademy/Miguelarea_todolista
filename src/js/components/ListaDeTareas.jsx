@@ -3,30 +3,63 @@ import { Trash2 } from 'lucide-react';
 import '../../styles/index.css';
 
 const user = 'Miguelarea';
+
 const ListaDeTareas = () => {
   const [listaDeTareas, setListaDeTareas] = useState([]);
   const [nuevaTarea, setNuevaTarea] = useState('');
 
-  // Cargar tareas al montar
+  // Crear usuario al iniciar (solo si no existe)
   useEffect(() => {
-    getTareas();
+    crearUsuario().then(getTareas);
   }, []);
 
-  // GET
+  const crearUsuario = async () => {
+    try {
+      const res = await fetch(`https://playground.4geeks.com/todo/users/${user}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify([])
+      });
+
+      if (res.status === 400) {
+        console.log('✅ Usuario ya existe.');
+      } else if (!res.ok) {
+        const text = await res.text();
+        console.error('🚫 Error creando usuario:', res.status, text);
+      } else {
+        console.log('✅ Usuario creado correctamente.');
+      }
+    } catch (error) {
+      console.error('❌ Error en crearUsuario:', error);
+    }
+  };
+
   const getTareas = () => {
     fetch(`https://playground.4geeks.com/todo/users/${user}`)
       .then(res => res.json())
-      .then(data => setListaDeTareas(Array.isArray(data.todos) ? data.todos : []))
+      .then(data => {
+        if (Array.isArray(data.todos)) {
+          setListaDeTareas(data.todos);
+        } else {
+          console.warn('⚠ No hay tareas o formato incorrecto:', data);
+          setListaDeTareas([]);
+        }
+      })
       .catch(err => console.error('❌ Error al obtener tareas:', err));
   };
 
-  // POST (crear una)
   const agregarTarea = (e) => {
     if (e.key === 'Enter' && nuevaTarea.trim()) {
-      const tarea = { label: nuevaTarea.trim(), is_done: false };
+      const tarea = {
+        label: nuevaTarea.trim(),
+        is_done: false
+      };
+
       fetch(`https://playground.4geeks.com/todo/todos/${user}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(tarea)
       })
         .then(res => {
@@ -34,6 +67,7 @@ const ListaDeTareas = () => {
           return res.json();
         })
         .then(() => {
+          console.log('✅ Tarea agregada');
           setNuevaTarea('');
           getTareas();
         })
@@ -41,24 +75,24 @@ const ListaDeTareas = () => {
     }
   };
 
-  // DELETE individual
   const eliminarTarea = (id) => {
-    fetch(`https://playground.4geeks.com/todo/todos/${id}`, { method: 'DELETE' })
-      .then(res => {
-        if (!res.ok) throw new Error('❌ Error al eliminar tarea');
-        getTareas();
-      })
-      .catch(err => console.error(err));
+    fetch(`https://playground.4geeks.com/todo/todos/${id}`, {
+      method: 'DELETE'
+    })
+      .then(() => getTareas())
+      .catch(err => console.error('❌ Error al eliminar tarea:', err));
   };
 
-  // DELETE todas
   const eliminarTodas = () => {
-    fetch(`https://playground.4geeks.com/todo/users/${user}`, { method: 'DELETE' })
-      .then(res => {
-        if (!res.ok) throw new Error('❌ Error al eliminar todas las tareas');
-        setListaDeTareas([]);
-      })
-      .catch(err => console.error(err));
+    Promise.all(
+      listaDeTareas.map((tarea) =>
+        fetch(`https://playground.4geeks.com/todo/todos/${tarea.id}`, {
+          method: 'DELETE'
+        })
+      )
+    )
+      .then(() => getTareas())
+      .catch(err => console.error('❌ Error al eliminar todas:', err));
   };
 
   return (
@@ -68,9 +102,10 @@ const ListaDeTareas = () => {
       <div className="tarjeta">
         <input
           className="entrada"
+          type="text"
           placeholder="¿Qué hay que hacer?"
           value={nuevaTarea}
-          onChange={e => setNuevaTarea(e.target.value)}
+          onChange={(e) => setNuevaTarea(e.target.value)}
           onKeyDown={agregarTarea}
         />
 
@@ -78,10 +113,10 @@ const ListaDeTareas = () => {
           {listaDeTareas.length === 0 ? (
             <li className="mensaje-vacio">No hay tareas, añade una</li>
           ) : (
-            listaDeTareas.map(t => (
-              <li key={t.id} className="tarea">
-                <span>{t.label}</span>
-                <button className="borrar" onClick={() => eliminarTarea(t.id)}>
+            listaDeTareas.map((tarea) => (
+              <li key={tarea.id} className="tarea">
+                <span>{tarea.label}</span>
+                <button className="borrar" onClick={() => eliminarTarea(tarea.id)}>
                   <Trash2 size={16} />
                 </button>
               </li>
@@ -102,4 +137,3 @@ const ListaDeTareas = () => {
 };
 
 export default ListaDeTareas;
-
