@@ -8,7 +8,7 @@ const ListaDeTareas = () => {
   const [listaDeTareas, setListaDeTareas] = useState([]);
   const [nuevaTarea, setNuevaTarea] = useState('');
 
-  // Crear usuario al iniciar (solo si no existe)
+  
   useEffect(() => {
     crearUsuario().then(getTareas);
   }, []);
